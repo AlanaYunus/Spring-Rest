@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<style>
+    td, tr, article {
+        text-align: center;
+    }
+
+</style>
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script type="text/javascript" src="../static/jq.js" th:src="@{/jq.js}"></script>
+    <script type="text/javascript" src="../static/main.js" th:src="@{/main.js}"></script>
+</head>
+
+<body class="bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <span class="navbar-brand" th:text="${user.getEmail()}"></span>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <span class="navbar-brand">with roles:</span>
+                </li>
+                <li class="nav-item">
+                    <span class="navbar-brand" th:text="${user.rolesToString()}"></span>
+                </li>
+            </ul>
+        </div>
+        <form th:method="GET" th:action="@{/logout}">
+            <input type="submit" class="btn btn-secondary my-sm-0" value="Logout">
+        </form>
+    </div>
+</nav>
+<!--SidePills-->
+<div class="container-fluid">
+    <div class="row">
+        <nav class="bg-white col-2 content-center vh-100">
+            <div class="av flex-column nav-pills" id="v-pills-tab"
+                 role="tablist" aria-orientation="vertical">
+                <a class="nav-link  my-3 text-center" id="v-pills-home-tab" th:href="@{/admin/adminPanel}"
+                   type="button" role="tab" aria-controls="v-pills-home" aria-selected="false">Admin
+                </a>
+                <a class="nav-link active text-center" type="button" role="link"
+                   aria-controls="v-pills-profile" aria-selected="true">User
+                </a>
+            </div>
+
+        </nav>
+        <!--SidePills-->
+        <!--TABS-->
+        <div class="container col-9">
+            <h2 class="my-3">User information</h2>
+            <div class="tab-content bg-white" id="nav-tabContent">
+                <!--AllUsers-->
+                <div class="tab-pane fade show active bg-white" id="nav-home" role="tabpanel"
+                     aria-labelledby="nav-home-tab">
+                    <div class="card">
+                        <div class="card-header">About user</div>
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Email</th>
+                                    <th>Age</th>
+                                    <th>Role</th>
+                                </tr>
+                                <tr th:object="${user}">
+                                    <td th:text="${user.getId()}"></td>
+                                    <td th:text="${user.getName()}"></td>
+                                    <td th:text="${user.getSurname()}"></td>
+                                    <td th:text="${user.getEmail()}"></td>
+                                    <td th:text="${user.getAge()}"></td>
+                                    <td th:text="${user.rolesToString()}"></td>
+                                    <td>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!--/AllUsers-->
+
+            </div>
+        </div>
+        <!--/TABS-->
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
